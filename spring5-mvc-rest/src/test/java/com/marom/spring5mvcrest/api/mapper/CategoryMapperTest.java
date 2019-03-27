@@ -1,6 +1,6 @@
 package com.marom.spring5mvcrest.api.mapper;
 
-import com.marom.spring5mvcrest.api.model.CategoryDTO;
+import com.marom.spring5mvcrest.api.model.CategoryDto;
 import com.marom.spring5mvcrest.domain.Category;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class CategoryMapperTest {
         category.setId(ID);
 
         //when
-        CategoryDTO categoryDTO = categoryMapper.categoryToCategoryDTO(category);
+        CategoryDto categoryDTO = categoryMapper.categoryToCategoryDto(category);
 
         //then
         assertEquals(Long.valueOf(ID), categoryDTO.getId());
