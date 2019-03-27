@@ -6,11 +6,13 @@ import com.marom.spring5mvcrest.domain.Customer;
 import com.marom.spring5mvcrest.repositories.CustomerRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -71,4 +73,26 @@ public class CustomerServiceImplTest {
         assertEquals("Michale", customerDto.getFirstName());
     }
 
+
+    @Test
+    public void createNewCustomer() throws Exception {
+
+        //given
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setFirstName("Jim");
+
+        Customer savedCustomer = new Customer();
+        savedCustomer.setFirstName(customerDto.getFirstName());
+        savedCustomer.setLastName(customerDto.getLastName());
+        savedCustomer.setId(1l);
+
+        when(customerRepository.save(ArgumentMatchers.any(Customer.class))).thenReturn(savedCustomer);
+
+        //when
+        CustomerDto savedDto = customerService.createNewCustomer(customerDto);
+
+        //then
+        assertEquals(customerDto.getFirstName(), savedDto.getFirstName());
+        assertEquals("/api/customers/1", savedDto.getCustomerUrl());
+    }
 }
