@@ -1,6 +1,6 @@
 package com.marom.spring5mvcrest.controllers;
 
-import com.marom.spring5mvcrest.api.model.CategoryDTO;
+import com.marom.spring5mvcrest.api.model.CategoryDto;
 import com.marom.spring5mvcrest.services.CategoryService;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,19 +45,19 @@ public class CategoryControllerTest {
     @Test
     public void listCategories() throws Exception {
 
-        CategoryDTO category1 = new CategoryDTO();
+        CategoryDto category1 = new CategoryDto();
         category1.setId(1l);
         category1.setName(NAME);
 
-        CategoryDTO category2 = new CategoryDTO();
+        CategoryDto category2 = new CategoryDto();
         category2.setId(2l);
         category2.setName("Bob");
 
-        List<CategoryDTO> categories = Arrays.asList(category1, category2);
+        List<CategoryDto> categories = Arrays.asList(category1, category2);
 
         when(categoryService.getAllCategories()).thenReturn(categories);
 
-        mockMvc.perform(get("/api/v1/categories/")
+        mockMvc.perform(get("/api/categories/")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.categories", hasSize(2)));
@@ -66,13 +66,13 @@ public class CategoryControllerTest {
     @Test
     public void getByNameCategories() throws Exception {
 
-        CategoryDTO category1 = new CategoryDTO();
+        CategoryDto category1 = new CategoryDto();
         category1.setId(1l);
         category1.setName(NAME);
 
         when(categoryService.getCategoryByName(anyString())).thenReturn(category1);
 
-        mockMvc.perform(get("/api/v1/categories/Jim")
+        mockMvc.perform(get("/api/categories/Jim")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo(NAME)));
