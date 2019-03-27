@@ -6,12 +6,10 @@ import com.marom.spring5mvcrest.services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/customers/")
+@RequestMapping("/api/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -25,12 +23,17 @@ public class CustomerController {
 
         return new ResponseEntity<>(new CustomerListDto(customerService.getAllCustomers()),
                 HttpStatus.OK);
-
     }
 
-    @GetMapping({"{id}"})
+    @GetMapping({"/{id}"})
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Long id){
         return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<CustomerDto> createNewCustomer(@RequestBody CustomerDto customerDto){
+        return new ResponseEntity<>(customerService.createNewCustomer(customerDto),
+                HttpStatus.CREATED);
     }
 
 }
