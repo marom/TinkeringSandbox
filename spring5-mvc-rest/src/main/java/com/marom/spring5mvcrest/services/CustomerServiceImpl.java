@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .stream()
                 .map(customer -> {
                     CustomerDto customerDto = customerMapper.customerToCustomerDTO(customer);
-                    customerDto.setCustomerUrl("/api/v1/customers/" + customer.getId());
+                    customerDto.setCustomerUrl("/api/customers/" + customer.getId());
                     return customerDto;
                 })
                 .collect(Collectors.toList());
