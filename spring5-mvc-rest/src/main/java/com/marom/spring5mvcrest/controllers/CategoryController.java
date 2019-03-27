@@ -1,7 +1,7 @@
 package com.marom.spring5mvcrest.controllers;
 
-import com.marom.spring5mvcrest.api.model.CategoryDTO;
-import com.marom.spring5mvcrest.api.model.CategoryListDTO;
+import com.marom.spring5mvcrest.api.model.CategoryDto;
+import com.marom.spring5mvcrest.api.model.CategoryListDto;
 import com.marom.spring5mvcrest.services.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +21,14 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<CategoryListDTO> getAllCategories(){
+    public ResponseEntity<CategoryListDto> getAllCategories(){
 
         return new ResponseEntity<>(
-                new CategoryListDTO(categoryService.getAllCategories()), HttpStatus.OK);
+                new CategoryListDto(categoryService.getAllCategories()), HttpStatus.OK);
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name){
+    public ResponseEntity<CategoryDto> getCategoryByName(@PathVariable String name){
 
         return new ResponseEntity<>(
                 categoryService.getCategoryByName(name), HttpStatus.OK

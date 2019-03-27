@@ -1,7 +1,7 @@
 package com.marom.spring5mvcrest.services;
 
 import com.marom.spring5mvcrest.api.mapper.CategoryMapper;
-import com.marom.spring5mvcrest.api.model.CategoryDTO;
+import com.marom.spring5mvcrest.api.model.CategoryDto;
 import com.marom.spring5mvcrest.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +22,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> getAllCategories() {
+    public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll()
                 .stream()
-                .map(categoryMapper::categoryToCategoryDTO)
+                .map(categoryMapper::categoryToCategoryDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CategoryDTO getCategoryByName(String name) {
-        return categoryMapper.categoryToCategoryDTO(categoryRepository.findByName(name));
+    public CategoryDto getCategoryByName(String name) {
+        return categoryMapper.categoryToCategoryDto(categoryRepository.findByName(name));
     }
 }

@@ -1,7 +1,7 @@
 package com.marom.spring5mvcrest.services;
 
 import com.marom.spring5mvcrest.api.mapper.CategoryMapper;
-import com.marom.spring5mvcrest.api.model.CategoryDTO;
+import com.marom.spring5mvcrest.api.model.CategoryDto;
 import com.marom.spring5mvcrest.domain.Category;
 import com.marom.spring5mvcrest.repositories.CategoryRepository;
 import org.junit.Before;
@@ -42,10 +42,10 @@ public class CategoryServiceImplTest {
         when(categoryRepository.findAll()).thenReturn(categories);
 
         //when
-        List<CategoryDTO> categoryDTOS = categoryService.getAllCategories();
+        List<CategoryDto> categoryDtos = categoryService.getAllCategories();
 
         //then
-        assertEquals(3, categoryDTOS.size());
+        assertEquals(3, categoryDtos.size());
 
     }
 
@@ -60,7 +60,7 @@ public class CategoryServiceImplTest {
         when(categoryRepository.findByName(anyString())).thenReturn(category);
 
         //when
-        CategoryDTO categoryDTO = categoryService.getCategoryByName(NAME);
+        CategoryDto categoryDTO = categoryService.getCategoryByName(NAME);
 
         //then
         assertEquals(ID, categoryDTO.getId());

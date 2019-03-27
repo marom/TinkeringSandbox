@@ -1,12 +1,12 @@
 package com.marom.spring5mvcrest.services;
 
-import com.marom.spring5mvcrest.api.model.CategoryDTO;
+import com.marom.spring5mvcrest.api.model.CategoryDto;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryDTO> getAllCategories();
+    List<CategoryDto> getAllCategories();
 
-    CategoryDTO getCategoryByName(String name);
+    CategoryDto getCategoryByName(String name);
 }
