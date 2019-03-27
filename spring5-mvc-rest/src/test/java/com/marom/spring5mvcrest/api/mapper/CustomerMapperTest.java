@@ -21,7 +21,7 @@ public class CustomerMapperTest {
         customer.setLastName(FALLON);
 
         //when
-        CustomerDto customerDto = customerMapper.customerToCustomerDTO(customer);
+        CustomerDto customerDto = customerMapper.customerToCustomerDto(customer);
 
         //then
         assertEquals(JIMMY, customerDto.getFirstName());
