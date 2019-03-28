@@ -81,7 +81,7 @@ public class Bootstrap  implements CommandLineRunner {
         vendorRepository.save(vendorExotic);
         Vendor vendorHome = Vendor.builder().id(3L).name("Home Fruits.").build();
         vendorRepository.save(vendorHome);
-        Vendor vendorRed = Vendor.builder().id(2L).name("Red Tasty Fruits Company").build();
+        Vendor vendorRed = Vendor.builder().id(4L).name("Red Tasty Fruits Company").build();
         vendorRepository.save(vendorRed);
     }
 }
