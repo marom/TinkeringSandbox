@@ -35,7 +35,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void getAllCustomers() t {
+    public void getAllCustomers() {
         //given
         Customer customer1 = new Customer();
         customer1.setId(1l);
