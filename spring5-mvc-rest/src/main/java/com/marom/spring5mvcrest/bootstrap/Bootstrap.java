@@ -2,8 +2,10 @@ package com.marom.spring5mvcrest.bootstrap;
 
 import com.marom.spring5mvcrest.domain.Category;
 import com.marom.spring5mvcrest.domain.Customer;
+import com.marom.spring5mvcrest.domain.Vendor;
 import com.marom.spring5mvcrest.repositories.CategoryRepository;
 import com.marom.spring5mvcrest.repositories.CustomerRepository;
+import com.marom.spring5mvcrest.repositories.VendorRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +14,13 @@ public class Bootstrap  implements CommandLineRunner {
 
     private CategoryRepository categoryRepository;
     private final CustomerRepository customerRepository;
+    private VendorRepository vendorRepository;
 
 
-    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository, VendorRepository vendorRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class Bootstrap  implements CommandLineRunner {
 
         loadCategories();
         loadCustomers();
+        loadVendors();
     }
 
     private void loadCategories() {
@@ -66,5 +71,17 @@ public class Bootstrap  implements CommandLineRunner {
         customerRepository.save(customer2);
 
         System.out.println("Customers Loaded: " + customerRepository.count());
+    }
+
+    private void loadVendors() {
+
+        Vendor vendorTasty = Vendor.builder().id(1L).name("Western Tasty Fruits Ltd.").build();
+        vendorRepository.save(vendorTasty);
+        Vendor vendorExotic = Vendor.builder().id(2L).name("Exotic Fruits Company").build();
+        vendorRepository.save(vendorExotic);
+        Vendor vendorHome = Vendor.builder().id(3L).name("Home Fruits.").build();
+        vendorRepository.save(vendorHome);
+        Vendor vendorRed = Vendor.builder().id(2L).name("Red Tasty Fruits Company").build();
+        vendorRepository.save(vendorRed);
     }
 }
