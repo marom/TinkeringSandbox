@@ -35,7 +35,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void getAllCustomers() throws Exception {
+    public void getAllCustomers() t {
         //given
         Customer customer1 = new Customer();
         customer1.setId(1l);
@@ -58,7 +58,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void getCustomerById() throws Exception {
+    public void getCustomerById()  {
         //given
         Customer customer1 = new Customer();
         customer1.setId(1l);
@@ -75,7 +75,7 @@ public class CustomerServiceImplTest {
 
 
     @Test
-    public void createNewCustomer() throws Exception {
+    public void createNewCustomer() {
 
         //given
         CustomerDto customerDto = new CustomerDto();
