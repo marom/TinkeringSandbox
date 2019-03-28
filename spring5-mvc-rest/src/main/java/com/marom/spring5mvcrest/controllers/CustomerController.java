@@ -41,4 +41,15 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.replaceExistingCustomer(customerId, customerDto), HttpStatus.OK);
     }
 
+    @PatchMapping({"/{customerId}"})
+    public ResponseEntity<CustomerDto> updateExistingCustomer(@PathVariable Long customerId, @RequestBody CustomerDto customerDto) {
+        return new ResponseEntity<>(customerService.patchCustomer(customerId, customerDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping({"/{customerId}"})
+    public ResponseEntity<Void> deleteExistingCustomer(@PathVariable Long customerId) {
+        customerService.deleteCustomerById(customerId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
