@@ -2,6 +2,7 @@ package com.marom.spring5mvcrest.controllers;
 
 import com.marom.spring5mvcrest.api.model.CustomerDto;
 import com.marom.spring5mvcrest.api.model.CustomerListDto;
+import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class CustomerController {
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Long id){
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Long id) throws ResourceNotFoundException {
         return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
     }
 
@@ -42,7 +43,7 @@ public class CustomerController {
     }
 
     @PatchMapping({"/{customerId}"})
-    public ResponseEntity<CustomerDto> updateExistingCustomer(@PathVariable Long customerId, @RequestBody CustomerDto customerDto) {
+    public ResponseEntity<CustomerDto> updateExistingCustomer(@PathVariable Long customerId, @RequestBody CustomerDto customerDto) throws ResourceNotFoundException {
         return new ResponseEntity<>(customerService.patchCustomer(customerId, customerDto), HttpStatus.OK);
     }
 

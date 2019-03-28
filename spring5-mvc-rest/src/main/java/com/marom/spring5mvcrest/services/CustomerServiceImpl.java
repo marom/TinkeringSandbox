@@ -3,6 +3,7 @@ package com.marom.spring5mvcrest.services;
 import com.marom.spring5mvcrest.api.mapper.CustomerMapper;
 import com.marom.spring5mvcrest.api.model.CustomerDto;
 import com.marom.spring5mvcrest.domain.Customer;
+import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +37,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getCustomerById(Long id) {
+    public CustomerDto getCustomerById(Long id) throws ResourceNotFoundException {
+//        return customerRepository.findById(id)
+//                .map(customerMapper::customerToCustomerDto)
+//                .orElseThrow(ResourceNotFoundException::new);
         return customerRepository.findById(id)
                 .map(customerMapper::customerToCustomerDto)
-                .orElseThrow(RuntimeException::new); //todo implement better exception handling
+                .map(customerDTO -> {
+                    //set API URL
+                    customerDTO.setCustomerUrl(getCustomerUrl(id));
+                    return customerDTO;
+                })
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -71,7 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto patchCustomer(Long id, CustomerDto customerDto) {
+    public CustomerDto patchCustomer(Long id, CustomerDto customerDto) throws ResourceNotFoundException {
         return customerRepository.findById(id).map(customer -> {
 
             if(customerDto.getFirstName() != null){
@@ -88,11 +97,15 @@ public class CustomerServiceImpl implements CustomerService {
 
             return returnDto;
 
-        }).orElseThrow(RuntimeException::new); //todo implement better exception handling;
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
     public void deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
+    }
+
+    private String getCustomerUrl(Long id) {
+        return "/api/customer/" + id;
     }
 }

@@ -1,6 +1,7 @@
 package com.marom.spring5mvcrest.controllers;
 
 import com.marom.spring5mvcrest.api.model.CustomerDto;
+import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.services.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
     }
 
     @Test
-    public void getCustomerById() throws Exception {
+    public void getCustomerById() throws Exception, ResourceNotFoundException {
 
         //given
         CustomerDto customer1 = new CustomerDto();
