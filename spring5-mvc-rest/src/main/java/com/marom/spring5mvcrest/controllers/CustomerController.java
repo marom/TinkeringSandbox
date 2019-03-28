@@ -36,4 +36,9 @@ public class CustomerController {
                 HttpStatus.CREATED);
     }
 
+    @PutMapping({"/{customerId}"})
+    public ResponseEntity<CustomerDto> replaceExistingCustomer(@PathVariable Long customerId, @RequestBody CustomerDto customerDto) {
+        return new ResponseEntity<>(customerService.replaceExistingCustomer(customerId, customerDto), HttpStatus.OK);
+    }
+
 }
