@@ -2,6 +2,8 @@ package com.marom.spring5mvcrest.services;
 
 import com.marom.spring5mvcrest.api.mapper.VendorMapper;
 import com.marom.spring5mvcrest.api.model.VendorDto;
+import com.marom.spring5mvcrest.domain.Vendor;
+import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.repositories.VendorRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,32 @@ public class VendorServiceImpl implements VendorService {
                     return vendorDto;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public VendorDto getVendorById(Long vendorId) throws ResourceNotFoundException {
+
+        return vendorRepository.findById(vendorId)
+                .map(vendorMapper::vendorToVendorDto)
+                .map(vendorDto -> {
+                    vendorDto.setVendorUrl(getVendorUrl(vendorId));
+                    return vendorDto;
+                })
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Override
+    public VendorDto createNewVendor(VendorDto vendorDto) {
+
+        final Vendor mappedVendor = vendorMapper.vendorDtoToVendor(vendorDto);
+        final Vendor vendor = vendorRepository.save(mappedVendor);
+
+        final VendorDto returnedVendorDto = vendorMapper.vendorToVendorDto(vendor);
+        returnedVendorDto.setVendorUrl(getVendorUrl(vendor.getId()));
+        return returnedVendorDto;
+    }
+
+    private String getVendorUrl(Long id) {
+        return "/api/vendors/" + id;
     }
 }
