@@ -3,18 +3,23 @@ package com.marom.spring5mvcrest.services;
 import com.marom.spring5mvcrest.api.mapper.VendorMapper;
 import com.marom.spring5mvcrest.api.model.VendorDto;
 import com.marom.spring5mvcrest.domain.Vendor;
+import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.repositories.VendorRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,6 +45,38 @@ public class VendorServiceImplTest {
 
         //then
         assertThat(allVendors, hasSize(2));
+    }
+
+    @Test public void getVendorById() throws ResourceNotFoundException {
+
+        //given
+        Vendor vendorTasty = Vendor.builder().id(1L).name("Western Tasty Fruits Ltd.").build();
+
+        //when
+        when(repository.findById(anyLong())).thenReturn(Optional.of(vendorTasty));
+
+        VendorDto vendorDto = vendorService.getVendorById(1L);
+
+        //then
+        assertEquals(vendorDto.getName(), vendorTasty.getName());
+
+    }
+
+    @Test
+    public void createNewVendor() throws ResourceNotFoundException {
+
+        //given
+        Vendor vendorTasty = Vendor.builder().id(1L).name("Western Tasty Fruits Ltd.").build();
+        VendorDto vendorTastyDto = VendorDto.builder().name("Western Tasty Fruits Ltd.").build();
+
+        //when
+        when(repository.save(ArgumentMatchers.any(Vendor.class))).thenReturn(vendorTasty);
+
+        VendorDto vendorDto = vendorService.createNewVendor(vendorTastyDto);
+
+        //then
+        assertEquals(vendorDto.getName(), vendorTasty.getName());
+        assertEquals(vendorDto.getVendorUrl(), "/api/vendors/1");
 
     }
 
