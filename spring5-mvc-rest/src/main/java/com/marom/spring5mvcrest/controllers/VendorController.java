@@ -21,6 +21,7 @@ public class VendorController {
         this.vendorService = vendorService;
     }
 
+    @ApiOperation(value = "This will get a list of vendors.", notes = "These are some notes about the API.")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<VendorDto> getAllVendors() {
