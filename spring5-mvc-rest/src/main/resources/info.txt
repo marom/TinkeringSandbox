@@ -1,2 +1,8 @@
 # docker run
 docker run -p 27017:27017 -d mongo
+
+# curl get examples
+curl -X GET --header 'Accept: application/json' 'http://localhost:8080/api/categories'
+curl -X GET --header 'Accept: application/json' 'http://localhost:8080/api/categories/5ca2215c254abf150b6af734'
+
+
