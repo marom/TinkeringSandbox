@@ -2,6 +2,7 @@ package com.marom.spring5mvcrest.services;
 
 import com.marom.spring5mvcrest.api.mapper.VendorMapper;
 import com.marom.spring5mvcrest.api.model.VendorDto;
+import com.marom.spring5mvcrest.api.model.VendorListDto;
 import com.marom.spring5mvcrest.domain.Vendor;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.repositories.VendorRepository;
@@ -41,10 +42,10 @@ public class VendorServiceImplTest {
         //when
         when(repository.findAll()).thenReturn(vendors);
 
-        final List<VendorDto> allVendors = vendorService.getAllVendors();
+        final VendorListDto allVendors = vendorService.getAllVendors();
 
         //then
-        assertThat(allVendors, hasSize(2));
+        assertThat(allVendors.getVendors(), hasSize(2));
     }
 
     @Test public void getVendorById() throws ResourceNotFoundException {

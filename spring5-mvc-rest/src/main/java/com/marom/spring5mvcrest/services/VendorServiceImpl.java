@@ -2,6 +2,7 @@ package com.marom.spring5mvcrest.services;
 
 import com.marom.spring5mvcrest.api.mapper.VendorMapper;
 import com.marom.spring5mvcrest.api.model.VendorDto;
+import com.marom.spring5mvcrest.api.model.VendorListDto;
 import com.marom.spring5mvcrest.domain.Vendor;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.repositories.VendorRepository;
@@ -22,8 +23,8 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Override
-    public List<VendorDto> getAllVendors() {
-        return vendorRepository.findAll()
+    public VendorListDto getAllVendors() {
+        List<VendorDto> vendorDtos = vendorRepository.findAll()
                 .stream()
                 .map(vendor -> {
                     VendorDto vendorDto = vendorMapper.vendorToVendorDto(vendor);
@@ -31,6 +32,8 @@ public class VendorServiceImpl implements VendorService {
                     return vendorDto;
                 })
                 .collect(Collectors.toList());
+
+        return new VendorListDto(vendorDtos);
     }
 
     @Override

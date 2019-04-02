@@ -1,14 +1,13 @@
 package com.marom.spring5mvcrest.controllers;
 
 import com.marom.spring5mvcrest.api.model.VendorDto;
+import com.marom.spring5mvcrest.api.model.VendorListDto;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.services.VendorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Api(description = "This is my Vendor Controller")
 @RestController
@@ -24,7 +23,7 @@ public class VendorController {
     @ApiOperation(value = "This will get a list of vendors.", notes = "These are some notes about the API.")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<VendorDto> getAllVendors() {
+    public VendorListDto getAllVendors() {
         return vendorService.getAllVendors();
     }
 
