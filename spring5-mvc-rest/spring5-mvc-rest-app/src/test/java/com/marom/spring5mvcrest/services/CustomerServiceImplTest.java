@@ -1,7 +1,7 @@
 package com.marom.spring5mvcrest.services;
 
+import com.marom.model.CustomerDto;
 import com.marom.spring5mvcrest.api.mapper.CustomerMapper;
-import com.marom.spring5mvcrest.api.model.CustomerDto;
 import com.marom.spring5mvcrest.domain.Customer;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.repositories.CustomerRepository;

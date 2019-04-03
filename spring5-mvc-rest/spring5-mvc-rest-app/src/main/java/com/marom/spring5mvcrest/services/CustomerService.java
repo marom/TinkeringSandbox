@@ -1,6 +1,7 @@
 package com.marom.spring5mvcrest.services;
 
-import com.marom.spring5mvcrest.api.model.CustomerDto;
+
+import com.marom.model.CustomerDto;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 
 import java.util.List;

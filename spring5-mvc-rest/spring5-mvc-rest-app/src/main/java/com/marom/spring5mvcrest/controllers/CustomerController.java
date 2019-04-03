@@ -1,7 +1,8 @@
 package com.marom.spring5mvcrest.controllers;
 
-import com.marom.spring5mvcrest.api.model.CustomerDto;
-import com.marom.spring5mvcrest.api.model.CustomerListDto;
+
+import com.marom.model.CustomerDto;
+import com.marom.model.CustomerListDTO;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.services.CustomerService;
 import org.springframework.http.HttpStatus;
@@ -20,10 +21,12 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<CustomerListDto> getListOfCustomers(){
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<CustomerListDTO> getListOfCustomers(){
 
-        return new ResponseEntity<>(new CustomerListDto(customerService.getAllCustomers()),
-                HttpStatus.OK);
+        final CustomerListDTO customerListDTO = new CustomerListDTO();
+        customerListDTO.getCustomers().addAll(customerService.getAllCustomers());
+        return new ResponseEntity<>(customerListDTO, HttpStatus.OK);
     }
 
     @GetMapping({"/{id}"})

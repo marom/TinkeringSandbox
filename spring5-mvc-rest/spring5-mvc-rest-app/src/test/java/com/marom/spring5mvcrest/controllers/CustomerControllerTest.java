@@ -1,10 +1,12 @@
 package com.marom.spring5mvcrest.controllers;
 
-import com.marom.spring5mvcrest.api.model.CustomerDto;
+
+import com.marom.model.CustomerDto;
 import com.marom.spring5mvcrest.exceptions.ResourceNotFoundException;
 import com.marom.spring5mvcrest.services.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -93,7 +95,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         returnDto.setLastName(customer.getLastName());
         returnDto.setCustomerUrl("/api/customers/1");
 
-        when(customerService.createNewCustomer(customer)).thenReturn(returnDto);
+        when(customerService.createNewCustomer(ArgumentMatchers.any())).thenReturn(returnDto);
 
         //when/then
         mockMvc.perform(post("/api/customers")
@@ -102,7 +104,8 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
                 .content(asJsonString(customer)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName", equalTo("Fred")))
-                .andExpect(jsonPath("$.customer_url", equalTo("/api/customers/1")));
+                .andExpect(jsonPath("$.customerUrl", equalTo("/api/customers/1")));
+
     }
 
     @Test
@@ -118,7 +121,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         returnDto.setLastName(customer.getLastName());
         returnDto.setCustomerUrl("/api/customers/1");
 
-        when(customerService.replaceExistingCustomer(1L, customer)).thenReturn(returnDto);
+        when(customerService.replaceExistingCustomer(anyLong(), ArgumentMatchers.any())).thenReturn(returnDto);
 
         //when/then
         mockMvc.perform(put("/api/customers/1")
@@ -127,6 +130,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", equalTo("Fred")))
-                .andExpect(jsonPath("$.customer_url", equalTo("/api/customers/1")));
+                .andExpect(jsonPath("$.customerUrl", equalTo("/api/customers/1")));
     }
 }
