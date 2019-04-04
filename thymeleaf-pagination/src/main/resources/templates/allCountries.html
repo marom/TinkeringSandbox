@@ -30,6 +30,14 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <hr/>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item" th:each="i : ${#numbers.sequence(0, countries.totalPages-1)}">
+                        <a th:href="@{/all/(page=${i})}" th:text="${i}" class="nav-link" />
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
