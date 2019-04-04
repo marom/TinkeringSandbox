@@ -21,7 +21,7 @@ public class CountryController {
     public String listAllCountries(Model model, @RequestParam(defaultValue = "0") int page) {
         //showPage(@PageableDefault(size=4)Pageable pageable)
 
-        model.addAttribute("countries", countryRepository.findAll(PageRequest.of(page, 4)));
+        model.addAttribute("countries", countryRepository.findAll(PageRequest.of(page, 8)));
 
         return "allCountries";
     }
