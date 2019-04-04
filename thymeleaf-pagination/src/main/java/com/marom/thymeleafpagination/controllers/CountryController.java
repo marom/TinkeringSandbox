@@ -22,6 +22,7 @@ public class CountryController {
         //showPage(@PageableDefault(size=4)Pageable pageable)
 
         model.addAttribute("countries", countryRepository.findAll(PageRequest.of(page, 8)));
+        model.addAttribute("currentPage", page);
 
         return "allCountries";
     }
