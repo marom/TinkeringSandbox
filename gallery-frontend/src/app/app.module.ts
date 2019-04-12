@@ -8,8 +8,11 @@ import {PhotoListComponent} from './components/photo-list/photo-list.component';
 import {SidePanelComponent} from './components/side-panel/side-panel.component';
 
 import {PhotoService} from './services/photo.service';
+import {RegisterService} from "./services/register.service";
 import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {RegisterComponent} from './components/register/register.component';
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,10 +25,13 @@ import {RegisterComponent} from './components/register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
-    PhotoService
+    PhotoService,
+    RegisterService
   ],
   bootstrap: [AppComponent]
 })
