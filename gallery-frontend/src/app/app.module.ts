@@ -7,13 +7,15 @@ import { PhotoListComponent } from './components/photo-list/photo-list.component
 import { SidePanelComponent} from './components/side-panel/side-panel.component';
 
 import { PhotoService} from './services/photo.service';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PhotoListComponent,
-    SidePanelComponent
+    SidePanelComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule
