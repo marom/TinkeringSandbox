@@ -19,7 +19,7 @@ public class UserController {
         return "";
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public User register(@RequestBody User user) {
         return userService.save(user);
     }
