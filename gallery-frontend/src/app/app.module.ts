@@ -13,6 +13,7 @@ import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {RegisterComponent} from './components/register/register.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {LoginComponent} from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
     PhotoListComponent,
     SidePanelComponent,
     NavBarComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
