@@ -14,6 +14,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './components/login/login.component';
+import {LoginService} from "./services/login.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {LoginComponent} from './components/login/login.component';
   ],
   providers: [
     PhotoService,
-    RegisterService
+    RegisterService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
