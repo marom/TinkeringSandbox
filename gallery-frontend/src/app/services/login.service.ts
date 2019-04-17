@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map} from "rxjs/operators";
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +9,43 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class LoginService {
 
   token: string;
+  xxx: string;
 
   constructor(private http: HttpClient) { }
+  //
+  // login(model) {
+  //   return this.http.post<{access_token:  string}>('http://localhost:8080/user/login', (model).pipe(tap(res => {
+  //     localStorage.setItem('access_token', res.access_token);
+  //   }))
+  // }
+  //
+  // register(email:string, password:string) {
+  //   return this.http.post<{access_token: string}>('http://www.your-server.com/auth/register', {email, password}).pipe(tap(res => {
+  //     this.login(email, password)
+  //   }))
+  // }
 
+  //
+  // login(username: string, password: string) {
+  //   return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
+  //     .pipe(map(user => {
+  //       // login successful if there's a jwt token in the response
+  //       if (user && user.token) {
+  //         // store user details and jwt token in local storage to keep user logged in between page refreshes
+  //         localStorage.setItem('currentUser', JSON.stringify(user));
+  //         this.currentUserSubject.next(user);
+  //       }
+  //
+  //       return user;
+  //     }));
+  // }
 
   sendCredential(model) {
-    let tokenUrl1 = "http://localhost:8080/user/login";
-    let headers1 = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(tokenUrl1, JSON.stringify(model), {headers: headers1});
+    let tokenUrl1 = 'http://localhost:8080/user/login';
+    //let headers1 = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<any>(tokenUrl1, (model)).pipe(map(res => {
+      console.log('XX:' + res);
+    }));
   }
 
   sendToken(token) {

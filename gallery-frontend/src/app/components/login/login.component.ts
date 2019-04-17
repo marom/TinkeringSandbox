@@ -12,25 +12,27 @@ export class LoginComponent implements OnInit {
   private currentUserName;
 
   constructor (private loginService: LoginService){
-    this.currentUserName = localStorage.getItem("currentUserName");
+    this.currentUserName = localStorage.getItem('currentUserName');
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    this.loginService.sendCredential(this.model).subscribe(
+   this.loginService.sendCredential(this.model).subscribe(
       data => {
-        localStorage.setItem("token", JSON.parse(JSON.stringify(data))._body);
-        this.loginService.sendToken(localStorage.getItem("token")).subscribe(
-          data => {
-            this.currentUserName=this.model.username;
-            localStorage.setItem("currentUserName", this.model.username);
-            this.model.username='';
-            this.model.password='';
-          },
-          error => console.log(error)
-        );
+       // console.log('XdataX:'+data);
+       // console.log('Data log 2:' + JSON.parse(JSON.stringify(data)).body);
+        //localStorage.setItem('token', JSON.stringify(data));
+        // this.loginService.sendToken(localStorage.getItem('token')).subscribe(
+        //   data => {
+        //     this.currentUserName=this.model.username;
+        //     localStorage.setItem('currentUserName', this.model.username);
+        //     this.model.username='';
+        //     this.model.password='';
+        //   },
+        //   error => console.log(error)
+        // );
       },
       error => console.log(error)
     );
