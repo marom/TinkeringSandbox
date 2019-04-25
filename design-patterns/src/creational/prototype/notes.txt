@@ -1,0 +1,25 @@
+This is Definition from GoF:
+
+Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+Examples of Prototype Pattern
+Suppose that we want to buy a birthday cake. The cake is like the prototype with process of creating the same cakes hundreds of times.
+When we need a cake, the store only need to clone it, and for additional requirement, we can ask for printing specific name on the cake.
+
+Now look at another example, a smartphone company produces thousands of mobiles with the same hardware and software.
+But with different model (color), the price could change.
+
+--Pros
+Reusability: In case we want to create an instance of a class with many default values, or in same complicated processes,
+Prototype Pattern is useful. We can focus on other activities instead.
+
+Reducing initialization: We can create new instances at a cheaper cost.
+Simple copy process: We only need to call clone() method, it is simple and easy-reading.
+
+--Cons
+Each subclass have to implement clone() method or alternative copy methods.
+Building clone for existing class may be complicated. For example, implementing
+Cloneable interface can constrain all subclasses/implementation to implement clone() method (some class may not need).
+If the class is in circular references, implementing clone() method in shallow copy way may cause problem.
+In the example with fields are primitive, it is ok, but when class object contains many fields that have references to other objects,
+ we need to implement deep copy.
+
