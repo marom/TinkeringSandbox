@@ -1,0 +1,15 @@
+Facade Pattern is a Structural Pattern in which, a set of interfaces is gathered into only one interface that Client can work easily and simply.
+Facade Pattern helps us to wrap complexities of components inside and lose coupling between Client and subSystems.
+
+Facade Pattern defines a higher interface/object – Facade – that wraps some lower interfaces/objects.
+Whenever Client wants to make a chain of complex actions which require many methods and interaction,
+it just call one simple Facade method, all operation can be done inside that method.
+
+Assume that we have some operations such as: register, consultation,
+health care that a Customer will be served when applying for our company’s Customer Services.
+
+With Facade Pattern, Client only need to create Customer Information,
+then calls FacadeService setServiceforCustomer() method.
+ All works containing register information, Consultation Service and HealhCare Service will be processed behind.
+
+
