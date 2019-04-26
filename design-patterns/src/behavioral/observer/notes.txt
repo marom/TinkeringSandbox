@@ -1,0 +1,8 @@
+Observer Pattern is a Behavioral Pattern in which, an Object (we call it Subject) contains a list of dependency Objects
+(we call them Observers).
+Observers will be notified and updated automatically whenever Subject changes its state.
+
+Observer Pattern defines one-to-many relationship between Subject and Observers:
+– The Subject maintains a list of Observers and has methods for adding, removing and notifying its Observers.
+– When Subject changes its state, all Observers are notified and updated automatically.
+– The Subject only know list of Observers and doesn’t care how they implement.
