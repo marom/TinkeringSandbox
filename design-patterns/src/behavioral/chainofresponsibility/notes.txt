@@ -1,0 +1,19 @@
+Chain of Responsibility Pattern is a Behavioral Pattern in which, a Request is sent through
+a chain of handling Objects without knowing which Object will handle it.
+With Chain of Responsibility Pattern, we can avoid coupling the Sender of a request to received Objects
+ and create a processing sequence automatically based on type of request.
+
+Chain of Responsibility Pattern defines a set of Handlers that receive request from Sender.
+Each Handler processes it if possible or pass to another Handler, or does both: process and pass it on.
+
+– We have an Abstract Handler class that contains inner Successor and handle method for processing Request and pass it to another Successor.
+– All Handlers extend Abstract Handler class. Each Handler sets its own Successor (the next Handler).
+– Client just gives Request for the first Handler to process, next Handler will handle Request automatically anytime it receives.
+
+The customer has a problem with a specific level of difficulty.
+We have 3 people with different standards: Regular Developer, Senior and Expert.
+Depending on the problem level, we choose person to give customer advice.
+So we pass problem (level) to Regular Developer first,
+if he is not qualified enough to solve the problem (his level is not equal problem level),
+he will pass the problem to people who has higher standard, and so on.
+
