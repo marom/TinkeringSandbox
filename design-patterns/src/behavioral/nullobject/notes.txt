@@ -5,3 +5,16 @@ Such Null object can also be used to provide default behaviour in case data is n
 In Null Object pattern, we create an abstract class specifying various operations to be done,
 concrete classes extending this class and a null object class providing do nothing implementation
 of this class and will be used seamlessly where we need to check null value.
+
+
+In most object-oriented languages, such as Java or C#, references may be null.
+These references need to be checked to ensure they are not null before invoking any methods,
+because methods typically cannot be invoked on null references.
+Instead of using a null reference to convey absence of an object (for instance, a non-existent customer),
+one uses an object which implements the expected interface, but whose method body is empty.
+The advantage of this approach over a working default implementation is that a Null Object is
+very predictable and has no side effects: it does nothing.
+
+Use the Null Object pattern when:
+- you want to avoid explicit null checks and keep the algorithm elegant and easy to read.
+
