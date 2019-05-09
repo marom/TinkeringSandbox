@@ -7,14 +7,14 @@ public class Calculator implements AdvancedArithmetic {
         if (n==1) {
             return n;
         } else {
-            int divisiorsSum = 1;
+            int divisorsSum = 1;
 
             for (int i = 2; i <= n / 2; i++) {
                 if (n % i == 0) {
-                    divisiorsSum = divisiorsSum + i;
+                    divisorsSum = divisorsSum + i;
                 }
             }
-            return divisiorsSum + n;
+            return divisorsSum + n;
         }
     }
 }
