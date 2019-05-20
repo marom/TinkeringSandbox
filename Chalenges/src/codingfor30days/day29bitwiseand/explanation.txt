@@ -1,0 +1,179 @@
+Let me try to explain.
+
+Consider the following Given the task "A&B is the maximum possible and also less than a given integer, K", the highest possible value to achieve is K-1
+
+So, let's try to achieve that highest value.
+
+Also consider that, when using the AND-operation with a pair of values you can never get a value higher than the lowest value of that pair. Because to get a value higher than the lowest value, you would have to turn a zero-bit out of the lowest value into a one-bit, and it's impossible to turn zero-bits into one-bits by using AND.
+
+So to achieve that highest value K-1, you need to find an even higher value, that in an AND-operation with K-1 results in K-1.
+
+You want that higher value to be as close to K-1 as possible, so that you have the biggest chance of that higher value being within the limits of N. (remember, both values of A and B had to be from the set {1,2,3,...,N})
+
+So, let's start with K-1 and turn that into a bits.
+
+The lowest, higher number that gives K-1 in an AND operation is K-1 with the least-significant zero turned into a one. This is the key to this elegant solution.
+
+Let's explain it with a few examples.
+
+1001001
+1001011
+-------AND
+1001001
+
+
+1011111
+1111111
+-------AND
+1011111
+
+
+1011000
+1011001
+-------AND
+1011000
+So in cases where K-1 is even this leaves us with a very simple answer. Because K-1 is even, the last bit of K-1 is zero. Turning the least-significant zero turned into a one, is the same as adding one, and K-1+1 = K. So K-1 & K = K-1 in cases where K-1 is even. K is <= N by definition so you have an answer.
+
+But when K-1 is odd, things start to get more complicated. Now you don't know at which position a zero will turn into a 1, so you don't know how big the lowest, higher number (that gives K-1 in an AND operation) will be. It can be 2 higher (with 0 at the 2nd place from the right) or 4 higher (with 0 at the 3nd place from the right) or 8, or 16, etc.
+
+So you need to check if this lowest, higher number is still smaller or as big as N. If it is than K-1 is your answer, if it isn't than K-2 is your answer.
+
+Why K-2? Well if K-1 is odd, than K-2 is even. Because K-2 is even, the last bit of K-2 is zero. Turning the least-significant zero turned into a one, is the same as adding one, and K-2+1 = K-1. So K-2 & K-1 = K-2 in cases where K-1 is odd K-1 is <= N by definition so you have an answer.
+
+But how to get the lowest higher number? Well, as said, by turning least-significant zero into a one. And how do you do that? By using the OR-operation on K and K-1
+
+Let's take the above examples and show that OR-ing the first value (K-1) with K, results in the second value, the value with the least significant zero turned into a one, being the lowest higher number that gives K-1 in and AND-operation
+
+1001001 (K-1)
+1001010 (K)
+-------OR
+1001011
+
+1011111 (K-1)
+1100000 (K)
+-------OR
+1111111
+
+1011000 (K-1)
+1011001 (K)
+-------OR
+1011001 (K)
+Note, that in the case where K-1 is even K-1 OR K = K
+
+Because K <= N the condition (K-1 OR K <= N) is always true in cases where K-1 is even.
+
+In cases where K-1 is odd, the condition (K-1 OR K <= N) sometimes evaluates to false (the lowest higher number is bigger than N), in which case the answer is K-2. When it evaluates to true, the answer is K-1.
+
+
+
+=========================
+
+I’ll try to explain this to my understanding and capacity.
+
+S – Set of numbers from 1 to N [Eg: 1,2,3…N]
+
+N – The last number in the set
+
+K – Threshold number [i.e limit for the answer to be obtained] and this value can be K <= N
+
+Since our answer should be < K, the possible answer would be <= K-1.
+
+We know that while doing an AND operation between 2 numbers, the answer would be <= LOWEST NUMBER of those 2 numbers. And we need to find this LOWEST NUMBER which is <= K-1
+
+So we need to find an AND pair which would result with our required answer.
+
+STEP 1: Since K-1 is the highest possible answer, we will take it as one of the 2 numbers. The other number should be > K-1 due to the AND property and it would be >= K. It’s best to take a number whose binary equivalent is similar to K-1’s binary value. So K would be the best choice.
+
+Note: By doing an OR operation between 2 numbers, the answer would be >= HIGHEST NUMBER of the 2 numbers.
+
+STEP 2: To find the other number we perform OR operation between the highest possible answer and the immediate larger number to it.
+
+i.e [(K-1) OR (K-1)+1] which is nothing but [(K-1) OR K] and its result would be >= K.
+
+STEP 3: Now we got the AND pair which are K-1 and K (minimum possible result of the above OR operation) and our AND result would be <= K-1.
+
+For most cases we will get the final answer as K-1 itself but not for all cases.
+
+a) When K is odd, the final answer will definitely be K-1 because if K is odd, K-1 will be even. Here only the LSB of the binary equivalent will be different. Eg: K=5(0101) ; K-1=4(0100)
+
+b) When K is even, K-1 will be odd and both number's binary values might not be similar. Eg: K=8(1000) ; K-1=7(0111)
+
+c) K-1 will be the answer only when the result of OR operation is <= N. If its > N, we would end up using a number which is not in the given number set for the AND operation which might result in a wrong final answer.
+
+So these cases occur when {(K-1 OR K) > N} and when K is even.
+
+For these scenarios, the highest possible answer would not be K-1 and it'll be the next lesser number K-2. The AND pairs for such scenarios would be K-2 and K-1 resulting with a final answer K-2.
+
+For the above cases, K-1 cannot be the highest possible answer so we take next the lesser number K-2 as the highest possible answer and we start again from STEP 1 replacing K-1 with K-2 and K with K-1.
+
+1.N=5, K=2 ; K-1 = 1
+
+0010	2(K)
+0001	1(K-1)
+-----OR----
+0011	3(OR result)
+
+3 < N
+
+0011	3(OR result)
+0001	1(K-1)
+-----AND----
+0001	1(final answer)
+
+
+
+2.N=8, K=5 ; K-1 = 4
+
+0101	5(K)
+0100	4(K-1)
+-----OR----
+0101	5(OR result)
+
+5 < N
+
+0101	5(OR result)
+0100	4(K-1)
+-----AND----
+0100	4(final answer)
+
+
+
+3.N=2, K=2 ; K-1 = 1 ; K-2 = 0
+
+0010	2(K)
+0001	1(K-1)
+-----OR----
+0011	3(OR result)
+
+3 > N
+
+0001	1(K-1)
+0000	0(K-2)
+-----OR----
+0001	1(OR result)
+
+0001	1(OR result)
+0000	0(K-2)
+-----AND----
+0000	0(final answer)
+
+
+
+4.N=21, K=20 ; K-1 = 19 ; K-2 = 18
+
+10100	20(K)
+10011	19(K-1)
+-----OR----
+10111	23(OR result)
+
+23 > N
+
+10011	19(K-1)
+10010	18(K-2)
+-----OR----
+10011	19(OR result)
+
+10011	19(OR result)
+10010	18(K-2)
+-----AND----
+10010	18(final answer)
