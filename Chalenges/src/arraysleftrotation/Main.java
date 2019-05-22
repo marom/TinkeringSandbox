@@ -13,10 +13,24 @@ public class Main {
             result[(i + (a.length - d)) % a.length] = a[i];
         }
             return result;
-
     }
 
+    static int[] rotLeftOneByOne(int[] a, int d) {
+        for (int i = 0; i < d; i++) {
+            leftRotatebyOne(a);
+        }
+        return a;
+    }
 
+    static void leftRotatebyOne(int arr[])
+    {
+        int i, temp;
+        temp = arr[0];
+        for (i = 0; i < arr.length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr[i] = temp;
+    }
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -39,8 +53,12 @@ public class Main {
         }
 
         int[] result = rotLeft(a, d);
-
         System.out.println(result);
+
+        System.out.println("=======");
+
+        int[] rotLeftOneByOne = rotLeftOneByOne(a, d);
+        System.out.println(rotLeftOneByOne);
         scanner.close();
     }
 
