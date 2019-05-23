@@ -1,0 +1,29 @@
+In this challenge, you will have two sorted arrays that must me merged to form a single, sorted array. Each of the arrays will be sorted in non-decreasing order.
+
+As an example, consider the arrays a=[1,2,3] and b=[2,5,5]. Merge the arrays to create array c as follows:
+
+a[0] < b[0] -> c = [a[0]] = [1]
+a[1] = b[0] -> c = [a[0], b[0]] = [1, 2]
+a[1] < b[1] -> c = [a[0], b[0], a[1]] = [1, 2, 2]
+a[2] < b[1] -> c = [a[0], b[0], a[1], a[2]] = [1, 2, 2, 3]
+no more elements in a -> c = [a[0], b[0], a[1], a[2], b[1], b[2]] = [1,2,2,3,5,5]
+
+Elements were alternatively taken from the arrays in the order given, maintaining precedence.
+
+Function description
+complete the function mergeArrays in the editor. the function must return an array of all the elements from both input arrays in non-decreasing order.
+
+mergeArrays has the following parameters:
+a[a0],...a[n-1]] a sorted array of integers
+b[b[0],..b[n-1]] a sorted array of integers
+
+Constrains
+1 < n < 5*10^5
+0 <= a[i], b[i] <= 10^9, where 0 <= i < n
+
+Explanation:
+a=[1, 5, 7, 8]
+b=[0, 1, 2, 3, 5, 12]
+
+output = [0, 1, 1, 2, 3, 5, 5, 7, 8, 12]
+ 
