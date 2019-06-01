@@ -1,0 +1,84 @@
+The positions of the elements in a matrix can be seen in terms of i and j and the values of i and j comes out to be as shown in the example below of a 3 x 3 matrix:
+
+0,0  0,1  0,2
+
+1,0  1,1  1,2
+
+2,0  2,1  2,2
+Here, the 1st digit represents the value of i and the 2nd digit represents value of j. There're two diagonals forming in the matrix given above. If we have to identify the diagonal elements in the matrix given above.
+
+1st diagonal: 0,0 ;  1,1 ;  2,2.
+2nd diagonal: 2,0  ;  1,1  ;   0,2.
+Since the square matrix in the question/problem is represented by a Jagged Array (array of arrays). If you don't have an idea of what Jagged Array is, then you might need to first know about the Jagged Array at the following link: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/jagged-arrays
+
+Now we analyse the solution:
+
+The solution is as follows:
+
+static int diagonalDifference(int[][] arr) {
+        int x = 0;
+        int y = arr[0].Length - 1;
+        int sum = 0;
+        for(int index=0;  index<arr.Length;  index++){
+            //sum -= arr[x][x] - arr[x++][y--]; can also be simplified as below:
+	 sum = sum - ( arr[x][x] - arr[x++][y--] );
+        }
+        return Math.Abs(sum);
+    }
+Now, with the following test input:
+
+11 2 4
+4 5 6
+10 8 -12
+If we've to look at the approach via position wise: we've done it as:
+
+Taking sum = 0
+sum = sum - (position(0,0) - position(0,2))
+then
+sum = sum - (position(1,1) - position(1,1))
+then
+sum = sum - (position(2,2) - position(2,0))
+We'll try to figure out how loop works on the test-input given above: We've initialized the value of x to be 0 and the value of y to be arr.Length -1. Note: arr.Length gives us the number of arrays in the Jagged Array, which in our case is 3. The Jagged array in question is as follows:
+
+int[][] arr = new int[3][];
+    arr[0] = new int[] {11, 2, 4};
+    arr[1] = new int[]  {4, 5, 6};
+    arr[2] = new int[]  {10, 8, -12};
+So the size of Jagged Array: arr in question is 3 (which is arr.Length) where each array further contains a simple array of int as can be seen above.
+
+Now let's analyse how loop works:
+
+1st round of loop will run as follows:
+the value of x = 0;
+the value of y = 2; //came from arr.Length - 1 i.e. 3 - 1 = 2
+arr[x][x] = arr[0][0] = 11
+arr[x++][y--] = arr[0][2] = 4
+sum = sum - (arr[x][x] - arr[x++][y--])
+sum = sum - (arr[0][0] - arr[0][2])
+sum= 0- (11-4)
+sum = -7
+After this operation the value of x++ will give 1 and y-- will give 1. The value of x and y for next loop operation becomes 1 and 1 respectively.
+
+2nd round of loop will run as follows:
+the value of x = 1
+the value of y = 1
+arr[x][x] = arr[1][1] = 5
+arr[x++][y--] = arr[1][1] = 5
+sum = sum - (arr[x][x] - arr[x++][y--])
+sum = sum - (arr[1][1] - arr[1][1])
+sum= -7 -(5 - 5)
+sum = -7
+After this operation the value of x++ will give 2 and y-- will give 0. The value of x and y for next loop operation becomes 2 and 0 respectively.
+
+3rd round of loop will run as follows:
+the value of x = 2
+the value of y = 0
+arr[x][x] = arr[2][2] = -12
+arr[x++][y--] = arr[2][0] = 10
+sum = sum - (arr[x][x] - arr[x++][y--])
+sum = sum - (arr[2][2] - arr[2][0])
+sum = -7 -(-12 - 10)
+sum = - 7 -(-22)
+sum = -7 + 22
+sum = 15
+After this operation the value of x++ will give 3 and y-- will give -1. The value of x and y for next loop operation becomes 3 and -1 respectively and this will fail the loop condition and the loop iteration will stop giving 15 as final result.
