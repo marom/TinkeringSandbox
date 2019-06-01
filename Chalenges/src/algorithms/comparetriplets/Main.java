@@ -1,4 +1,4 @@
-package comparetriplets;
+package algorithms.comparetriplets;
 
 import java.io.BufferedReader;
 import java.io.IOException;
